@@ -1,0 +1,1 @@
+export default (a: any, b: any) => Number(a) < Number(b);
