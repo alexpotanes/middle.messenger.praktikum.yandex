@@ -1,0 +1,18 @@
+<div class="chats">
+    <header class="chats__header">
+        <div class="chats__profile">
+            <a href="/profile">Профиль <img src="/src/assets/chevron.svg" alt="" /></a>
+        </div>
+        <label class="chats__search">
+            <input type="text" />
+            <span class="chats__search-placeholder">Поиск</span>
+        </label>
+    </header>
+    <section class="chats__body">
+        <ul class="chats__list">
+            {{#each chats}}
+                {{> chat-item}}
+            {{/each}}
+        </ul>
+    </section>
+</div>

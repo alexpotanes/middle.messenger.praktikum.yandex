@@ -1,0 +1,15 @@
+<div class="form-field">
+    <label class="form-field__label{{#if isFile}} form-field__label_file{{/if}}" for="{{id}}">
+        {{label}}
+    </label>
+    <input
+            class="form-field__input{{#if isFile}} form-field__input_hidden{{/if}}"
+            type="{{type}}"
+            id="{{id}}"
+            {{#if value}}value="{{value}}"{{/if}}
+    />
+    {{#if error}}
+        <span class="form-field__error">{{error}}</span>
+    {{/if}}
+</div>
+

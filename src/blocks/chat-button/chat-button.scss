@@ -1,0 +1,22 @@
+@use '../../styles/variables' as *;
+
+.chat-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: $color-primary;
+  cursor: pointer;
+  align-self: flex-end;
+  margin: 12px 0;
+  flex-shrink: 0;
+
+  img {
+    width: 16px;
+    height: 16px;
+    filter: brightness(0) invert(1);
+  }
+}

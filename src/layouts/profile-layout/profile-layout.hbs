@@ -1,0 +1,30 @@
+{{> back-button}}
+<main class="page__content">
+    <section class="profile__wrapper">
+        {{> profile-avatar src=avatarSrc}}
+        {{#if profileName}}
+            <h2 class="profile__title">{{profileName}}</h2>
+        {{/if}}
+        <ul class="profile__data-list list">
+            {{#each fields}}
+                {{> profile-list-item}}
+            {{/each}}
+        </ul>
+        {{#if editable}}
+            <button class="modal-block__button">Сохранить</button>
+        {{else}}
+            <ul class="profile__data-list list">
+                <li class="list__item">
+                    <a href="/change-profile" class="link">Изменить данные</a>
+                </li>
+                <li class="list__item">
+                    <a href="/change-password" class="link">Изменить пароль</a>
+                </li>
+                <li class="list__item">
+                    <a href="/logout" class="link link--warn">Выйти</a>
+                </li>
+            </ul>
+        {{/if}}
+    </section>
+</main>
+{{#if modal}}{{> modal modal}}{{/if}}

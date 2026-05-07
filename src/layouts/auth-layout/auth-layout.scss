@@ -1,0 +1,9 @@
+// Из CSS: .wrapper — центрирующая обёртка для страниц входа и регистрации.
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+}

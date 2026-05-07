@@ -1,0 +1,57 @@
+@use '../../styles/variables' as *;
+
+.modal-block {
+  margin: auto;
+  width: 340px;
+  padding: 30px;
+  box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.14);
+  border-radius: 12px;
+  background: $color-white;
+
+  &__title {
+    font: bold 20px $font-base;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 370px;
+
+    &_compact {
+      min-height: 0;
+    }
+  }
+
+  &__footer {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 45px;
+  }
+
+  &__button {
+    background-color: $color-primary;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 280px;
+    height: 37px;
+    border: none;
+    color: $color-white;
+    font-size: 13px;
+    text-align: center;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+
+  &__link {
+    display: inline-block;
+    text-decoration: none;
+    color: $color-primary;
+    font: bold 11px $font-base;
+    width: 100%;
+    text-align: center;
+  }
+}
