@@ -33,6 +33,7 @@ import changeProfilePage from './pages/change-profile.hbs?raw';
 import changePasswordPage from './pages/change-password.hbs?raw';
 import page404 from './pages/404.hbs?raw';
 import page500 from './pages/500.hbs?raw';
+import navPage from './pages/nav.hbs?raw';
 
 // mocks
 import { chats } from './mocks/chats';
@@ -63,6 +64,11 @@ Handlebars.registerPartial('dropdown-menu__item', dropdownItemTpl);
 Handlebars.registerPartial('error-page', errorPageTpl);
 
 const pages: Record<string, { tpl: string; bodyClass: string; ctx: object }> = {
+    nav: {
+        tpl: navPage,
+        bodyClass: 'nav-page',
+        ctx: {}
+    },
     login: {
         tpl: loginPage,
         bodyClass: '',
@@ -194,7 +200,7 @@ const pages: Record<string, { tpl: string; bodyClass: string; ctx: object }> = {
     },
 };
 
-const pageKey = new URLSearchParams(window.location.search).get('page') ?? 'login';
+const pageKey = new URLSearchParams(window.location.search).get('page') ?? 'nav';
 const current = pages[pageKey] ?? pages['404'];
 
 document.title = (current.ctx as Record<string, string>).title ?? '';
