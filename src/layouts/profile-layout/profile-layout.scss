@@ -32,22 +32,21 @@
     justify-content: center;
   }
 }
-
-.profile__wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.profile__title {
-  font: bold 16px $font-base;
-}
-
-.profile__data-list {
-  display: flex;
-  flex-direction: column;
-  list-style-type: none;
-  margin: 40px 0;
-  padding: 0;
-  width: 510px;
+.profile {
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  &__title {
+    font: bold 16px $font-base;
+  }
+  &__data-list {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    margin: 40px 0;
+    padding: 0;
+    width: 510px;
+  }
 }
