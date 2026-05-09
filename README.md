@@ -1,7 +1,8 @@
 ## Описание
 
 Скетч из верстки с handlebars для приложения-мессенджера.
-Просмотреть страницы можно после запуска в http://localhost:3000/nav.html
+Проект развернут в Netlify - https://middle-messenger-practicum.netlify.app/
+Просмотреть страницы можно после локального запуска в http://localhost:3000/nav.html
 
 ## Установка
 
