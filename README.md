@@ -1,7 +1,7 @@
 ## Описание
 
 Скетч из верстки с handlebars для приложения-мессенджера.
-Макет проекта в figma - https://www.figma.com/design/ltw86cj083JXjVa2gFg8C0/Chat_external_link?node-id=20-333&t=cPQ9skzu1boTHMq7-0
+Макет проекта в figma - https://www.figma.com/design/ltw86cj083JXjVa2gFg8C0/Chat_external_link
 Проект развернут в Netlify - https://middle-messenger-practicum.netlify.app/
 Просмотреть страницы можно после локального запуска в http://localhost:3000/nav.html
 
