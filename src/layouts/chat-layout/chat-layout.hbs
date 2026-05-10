@@ -1,0 +1,15 @@
+{{> sidebar}}
+{{#if activeChatName}}
+    <main class="messages">
+        {{> messages-header name=activeChatName}}
+        <section class="messages__chat">
+            <ul class="messages__list">
+                {{#each messages}}
+                    {{> message-item}}
+                {{/each}}
+            </ul>
+        </section>
+        {{> message-input}}
+    </main>
+{{/if}}
+{{#if modal}}{{> modal modal}}{{/if}}

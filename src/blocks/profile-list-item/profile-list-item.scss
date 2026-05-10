@@ -1,0 +1,34 @@
+@use '../../styles/variables' as *;
+
+.list__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 30px;
+  border-bottom: 1px solid $color-border;
+  font: 13px $font-base;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &-label {
+    color: $color-text-dark;
+    font-weight: 500;
+  }
+
+  &-value {
+    color: $color-text-muted;
+  }
+
+  &-input {
+    border: none;
+    text-align: end;
+    color: $color-text-muted;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}

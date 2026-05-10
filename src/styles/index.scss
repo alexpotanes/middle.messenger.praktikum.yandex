@@ -1,0 +1,25 @@
+@use 'variables';
+@use 'reset';
+@use 'shared';
+@use 'nav';
+
+// layouts
+@use '../layouts/auth-layout/auth-layout';
+@use '../layouts/profile-layout/profile-layout';
+@use '../layouts/chat-layout/chat-layout';
+
+// blocks
+@use '../blocks/back-button/back-button';
+@use '../blocks/chat-button/chat-button';
+@use '../blocks/profile-avatar/profile-avatar';
+@use '../blocks/profile-list-item/profile-list-item';
+@use '../blocks/form-field/form-field';
+@use '../blocks/modal-block/modal-block';
+@use '../blocks/modal/modal';
+@use '../blocks/sidebar/sidebar';
+@use '../blocks/chat-item/chat-item';
+@use '../blocks/messages-header/messages-header';
+@use '../blocks/message-item/message-item';
+@use '../blocks/message-input/message-input';
+@use '../blocks/dropdown-menu/dropdown-menu';
+@use '../blocks/error-page/error-page';
