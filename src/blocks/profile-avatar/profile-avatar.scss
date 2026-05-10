@@ -9,6 +9,12 @@
   position: relative;
   cursor: pointer;
 
+  input {
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+
   &::before {
     content: 'Поменять аватар';
     display: flex;

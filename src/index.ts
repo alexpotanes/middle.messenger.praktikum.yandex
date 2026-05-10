@@ -1,13 +1,11 @@
 import './styles/index.scss';
 import Handlebars from 'handlebars';
 
-// layouts
 import authLayoutTpl from './layouts/auth-layout/auth-layout.hbs?raw';
 import profileLayoutTpl from './layouts/profile-layout/profile-layout.hbs?raw';
 import chatLayoutTpl from './layouts/chat-layout/chat-layout.hbs?raw';
 import errorLayoutTpl from './layouts/error-layout/error-layout.hbs?raw';
 
-// blocks
 import formFieldTpl from './blocks/form-field/form-field.hbs?raw';
 import modalBlockTpl from './blocks/modal-block/modal-block.hbs?raw';
 import modalTpl from './blocks/modal/modal.hbs?raw';
@@ -24,7 +22,6 @@ import dropdownMenuTpl from './blocks/dropdown-menu/dropdown-menu.hbs?raw';
 import dropdownItemTpl from './blocks/dropdown-menu/__item/dropdown-menu__item.hbs?raw';
 import errorPageTpl from './blocks/error-page/error-page.hbs?raw';
 
-// pages
 import loginPage from './pages/login.hbs?raw';
 import registrationPage from './pages/registration.hbs?raw';
 import messengerPage from './pages/messenger.hbs?raw';
@@ -35,7 +32,6 @@ import page404 from './pages/404.hbs?raw';
 import page500 from './pages/500.hbs?raw';
 import navPage from './pages/nav.hbs?raw';
 
-// mocks
 import { chats } from './mocks/chats';
 import { currentUser } from './mocks/user';
 import { profileViewFields, profileEditFields, passwordFields } from './mocks/profile-fields';

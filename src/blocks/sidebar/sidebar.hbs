@@ -1,12 +1,12 @@
-<div class="chats">
+<aside class="chats">
     <header class="chats__header">
         <div class="chats__profile">
-            <a href="/profile">Профиль <img src="/src/assets/chevron.svg" alt="" /></a>
+            <a href="/profile">Профиль <img src="/src/assets/chevron.svg" alt="chevron" /></a>
         </div>
-        <label class="chats__search">
-            <input type="text" />
-            <span class="chats__search-placeholder">Поиск</span>
-        </label>
+        <div class="chats__search">
+           <input type="text" id="search" name="search" />
+           <label class="chats__search-placeholder" for="search">Поиск</label>
+        </div>
     </header>
     <section class="chats__body">
         <ul class="chats__list">
@@ -15,4 +15,4 @@
             {{/each}}
         </ul>
     </section>
-</div>
+</aside>

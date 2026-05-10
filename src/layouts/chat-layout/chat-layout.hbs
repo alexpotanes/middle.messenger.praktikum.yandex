@@ -1,6 +1,6 @@
 {{> sidebar}}
 {{#if activeChatName}}
-    <div class="messages">
+    <main class="messages">
         {{> messages-header name=activeChatName}}
         <section class="messages__chat">
             <ul class="messages__list">
@@ -10,6 +10,6 @@
             </ul>
         </section>
         {{> message-input}}
-    </div>
+    </main>
 {{/if}}
 {{#if modal}}{{> modal modal}}{{/if}}

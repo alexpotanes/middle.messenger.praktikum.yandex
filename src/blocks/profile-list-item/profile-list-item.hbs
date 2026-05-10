@@ -1,7 +1,12 @@
 <li class="list__item">
     <span class="list__item-label">{{label}}</span>
     {{#if editable}}
-        <input class="list__item-input" type="{{type}}" value="{{value}}" />
+        <input
+            class="list__item-input"
+            type="{{type}}"
+            value="{{value}}"
+            name="{{name}}"
+        />
     {{else}}
         <span class="list__item-value">{{value}}</span>
     {{/if}}
