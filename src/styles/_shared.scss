@@ -1,5 +1,9 @@
 @use './variables' as *;
-
+.wrapper {
+  display: flex;
+  width: calc(100% - 16px);
+  height: calc(100vh - 16px);
+}
 .link {
   font: 13px $font-base;
   text-decoration: none;

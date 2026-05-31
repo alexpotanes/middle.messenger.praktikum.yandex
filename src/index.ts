@@ -1,36 +1,13 @@
 import './styles/index.scss';
-import Handlebars from 'handlebars';
 
-import authLayoutTpl from './layouts/auth-layout/auth-layout.hbs?raw';
-import profileLayoutTpl from './layouts/profile-layout/profile-layout.hbs?raw';
-import chatLayoutTpl from './layouts/chat-layout/chat-layout.hbs?raw';
-import errorLayoutTpl from './layouts/error-layout/error-layout.hbs?raw';
+import './blocks/index';
 
-import formFieldTpl from './blocks/form-field/form-field.hbs?raw';
-import modalBlockTpl from './blocks/modal-block/modal-block.hbs?raw';
-import modalTpl from './blocks/modal/modal.hbs?raw';
-import backButtonTpl from './blocks/back-button/back-button.hbs?raw';
-import profileAvatarTpl from './blocks/profile-avatar/profile-avatar.hbs?raw';
-import profileListItemTpl from './blocks/profile-list-item/profile-list-item.hbs?raw';
-import sidebarTpl from './blocks/sidebar/sidebar.hbs?raw';
-import chatItemTpl from './blocks/chat-item/chat-item.hbs?raw';
-import chatButtonTpl from './blocks/chat-button/chat-button.hbs?raw';
-import messagesHeaderTpl from './blocks/messages-header/messages-header.hbs?raw';
-import messageItemTpl from './blocks/message-item/message-item.hbs?raw';
-import messageInputTpl from './blocks/message-input/message-input.hbs?raw';
-import dropdownMenuTpl from './blocks/dropdown-menu/dropdown-menu.hbs?raw';
-import dropdownItemTpl from './blocks/dropdown-menu/__item/dropdown-menu__item.hbs?raw';
-import errorPageTpl from './blocks/error-page/error-page.hbs?raw';
+import LoginPage from './pages/LoginPage';
+import NavPage from './pages/NavPage';
 
-import loginPage from './pages/login.hbs?raw';
-import registrationPage from './pages/registration.hbs?raw';
-import messengerPage from './pages/messenger.hbs?raw';
-import profilePage from './pages/profile.hbs?raw';
-import changeProfilePage from './pages/change-profile.hbs?raw';
-import changePasswordPage from './pages/change-password.hbs?raw';
-import page404 from './pages/404.hbs?raw';
-import page500 from './pages/500.hbs?raw';
-import navPage from './pages/nav.hbs?raw';
+import ChatLayout from './layouts/chat-layout/Chat';
+import ProfileLayout from './layouts/profile-layout/Profile';
+import ErrorLayout from './layouts/error-layout/Error';
 
 import { chats } from './mocks/chats';
 import { currentUser } from './mocks/user';
@@ -39,166 +16,140 @@ import { messages, activeChatName } from './mocks/messages';
 import { chatMenuItems, fileMenuItems } from './mocks/dropdown-menu';
 import { loginFields, registrationFields } from './mocks/auth-fields';
 
-Handlebars.registerPartial('auth-layout', authLayoutTpl);
-Handlebars.registerPartial('profile-layout', profileLayoutTpl);
-Handlebars.registerPartial('chat-layout', chatLayoutTpl);
-Handlebars.registerPartial('error-layout', errorLayoutTpl);
-Handlebars.registerPartial('form-field', formFieldTpl);
-Handlebars.registerPartial('modal-block', modalBlockTpl);
-Handlebars.registerPartial('modal', modalTpl);
-Handlebars.registerPartial('back-button', backButtonTpl);
-Handlebars.registerPartial('profile-avatar', profileAvatarTpl);
-Handlebars.registerPartial('profile-list-item', profileListItemTpl);
-Handlebars.registerPartial('sidebar', sidebarTpl);
-Handlebars.registerPartial('chat-item', chatItemTpl);
-Handlebars.registerPartial('chat-button', chatButtonTpl);
-Handlebars.registerPartial('messages-header', messagesHeaderTpl);
-Handlebars.registerPartial('message-item', messageItemTpl);
-Handlebars.registerPartial('message-input', messageInputTpl);
-Handlebars.registerPartial('dropdown-menu', dropdownMenuTpl);
-Handlebars.registerPartial('dropdown-menu__item', dropdownItemTpl);
-Handlebars.registerPartial('error-page', errorPageTpl);
+import type Block from '../system/Block';
 
-const pages: Record<string, { tpl: string; bodyClass: string; ctx: object }> = {
-    nav: {
-        tpl: navPage,
-        bodyClass: 'nav-page',
-        ctx: {}
-    },
-    login: {
-        tpl: loginPage,
-        bodyClass: '',
-        ctx: {
-            title: 'Вход',
-            fields: loginFields,
-            buttonText: 'Авторизоваться',
-            linkText: 'Нет аккаунта?',
-            linkHref: '/?page=registration'
-        }
-    },
-    registration: {
-        tpl: registrationPage,
-        bodyClass: '',
-        ctx: {
-            title: 'Регистрация',
-            fields: registrationFields,
-            buttonText: 'Зарегистрироваться',
-            linkText: 'Войти',
-            linkHref: '/?page=login'
-        }
-    },
-    messenger: {
-        tpl: messengerPage,
-        bodyClass: 'page-chat',
-        ctx: {
-            title: 'Мессенджер',
-            chats,
-            messages,
-            activeChatName,
-            menuItems: chatMenuItems,
-            fileItems: fileMenuItems
-        }
-    },
-    profile: {
-        tpl: profilePage,
-        bodyClass: 'page page--profile',
-        ctx: {
-            title: 'Профиль',
-            fields: profileViewFields,
-            avatarSrc: currentUser.avatarSrc,
-            profileName: currentUser.firstName
-        }
-    },
-    changeProfile: {
-        tpl: changeProfilePage,
-        bodyClass: 'page page--profile',
-        ctx: {
-            title: 'Редактирование',
-            fields: profileEditFields,
-            avatarSrc: currentUser.avatarSrc
-        }
-    },
-    changePassword: {
-        tpl: changePasswordPage,
-        bodyClass: 'page page--profile',
-        ctx: {
-            title: 'Изменение пароля',
-            fields: passwordFields,
-            avatarSrc: currentUser.avatarSrc
-        }
-    },
-    messengerAddUser: {
-        tpl: messengerPage,
-        bodyClass: 'page-chat',
-        ctx: {
-            title: 'Мессенджер',
-            chats,
-            messages,
-            activeChatName,
-            menuItems: chatMenuItems,
-            fileItems: fileMenuItems,
-            modal: {
-                title: 'Добавить пользователя',
-                fields: [{ id: 'login', label: 'Логин', type: 'text', value: '' }],
-                buttonText: 'Добавить',
-            },
+type PageFactory = () => Block;
+
+const pages: Record<string, PageFactory> = {
+    nav: () => new NavPage(),
+
+    login: () => new LoginPage({
+        title: 'Вход',
+        buttonText: 'Авторизоваться',
+        linkText: 'Нет аккаунта?',
+        linkHref: '/?page=registration',
+        fields: loginFields,
+    }),
+
+    registration: () => new LoginPage({
+        title: 'Регистрация',
+        buttonText: 'Зарегистрироваться',
+        linkText: 'Войти',
+        linkHref: '/?page=login',
+        fields: registrationFields,
+    }),
+
+    messenger: () => new ChatLayout({
+        chats,
+        messages,
+        activeChatName,
+        menuItems: chatMenuItems,
+        fileItems: fileMenuItems,
+    }),
+
+    messengerAddUser: () => new ChatLayout({
+        chats,
+        messages,
+        activeChatName,
+        menuItems: chatMenuItems,
+        fileItems: fileMenuItems,
+        modal: {
+            title: 'Добавить пользователя',
+            buttonText: 'Добавить',
+            fields: [{ id: 'login', label: 'Логин', type: 'text', value: '' }],
         },
-    },
-    messengerRemoveUser: {
-        tpl: messengerPage,
-        bodyClass: 'page-chat',
-        ctx: {
-            title: 'Мессенджер',
-            chats,
-            messages,
-            activeChatName,
-            menuItems: chatMenuItems,
-            fileItems: fileMenuItems,
-            modal: {
-                title: 'Удалить пользователя',
-                fields: [{ id: 'login', label: 'Логин', type: 'text', value: '' }],
-                buttonText: 'Удалить',
-            },
+    }),
+
+    messengerRemoveUser: () => new ChatLayout({
+        chats,
+        messages,
+        activeChatName,
+        menuItems: chatMenuItems,
+        fileItems: fileMenuItems,
+        modal: {
+            title: 'Удалить пользователя',
+            buttonText: 'Удалить',
+            fields: [{ id: 'login', label: 'Логин', type: 'text', value: '' }],
         },
-    },
-    changeProfileUpload: {
-        tpl: changeProfilePage,
-        bodyClass: 'page page--profile',
-        ctx: {
-            title: 'Редактирование профиля',
-            fields: profileEditFields,
-            avatarSrc: currentUser.avatarSrc,
-            editable: true,
-            modal: {
-                title: 'Загрузите файл',
-                fields: [
-                    {
-                        id: 'upload',
-                        label: 'Выбрать файл на компьютере',
-                        type: 'file',
-                        isFile: true,
-                        value: ''
-                    }
-                ],
-                buttonText: 'Поменять',
-            },
+    }),
+
+    profile: () => new ProfileLayout({
+        profileName: currentUser.firstName,
+        avatarSrc: currentUser.avatarSrc,
+        fields: profileViewFields,
+        editable: false,
+    }),
+
+    changeProfile: () => new ProfileLayout({
+        profileName: currentUser.firstName,
+        avatarSrc: currentUser.avatarSrc,
+        fields: profileEditFields,
+        editable: true,
+    }),
+
+    changePassword: () => new ProfileLayout({
+        avatarSrc: currentUser.avatarSrc,
+        fields: passwordFields,
+        editable: true,
+    }),
+
+    changeProfileUpload: () => new ProfileLayout({
+        profileName: currentUser.firstName,
+        avatarSrc: currentUser.avatarSrc,
+        fields: profileEditFields,
+        editable: true,
+        modal: {
+            title: 'Загрузите файл',
+            buttonText: 'Поменять',
+            fields: [{
+                id: 'upload',
+                label: 'Выбрать файл на компьютере',
+                type: 'file',
+                isFile: true,
+                value: '',
+            }],
         },
-    },
-    '404': {
-        tpl: page404,
-        bodyClass: 'page',
-        ctx: { title: '404', code: '404', text: 'Не туда попали' }
-    },
-    '500': {
-        tpl: page500,
-        bodyClass: 'page',
-        ctx: { title: '500', code: '500', text: 'Мы уже фиксим' }
-    },
+    }),
+
+    '404': () => new ErrorLayout({ code: '404', text: 'Не туда попали' }),
+    '500': () => new ErrorLayout({ code: '500', text: 'Мы уже фиксим' }),
+};
+
+const pageBodyClasses: Record<string, string> = {
+    nav: 'nav-page',
+    login: '',
+    registration: '',
+    messenger: 'page-chat',
+    messengerAddUser: 'page-chat',
+    messengerRemoveUser: 'page-chat',
+    profile: 'page page-profile',
+    changeProfile: 'page page-profile',
+    changePassword: 'page page-profile',
+    changeProfileUpload: 'page page-profile',
+    '404': 'page',
+    '500': 'page',
+};
+
+const pageTitles: Record<string, string> = {
+    login: 'Вход',
+    registration: 'Регистрация',
+    messenger: 'Мессенджер',
+    messengerAddUser: 'Мессенджер',
+    messengerRemoveUser: 'Мессенджер',
+    profile: 'Профиль',
+    changeProfile: 'Редактирование профиля',
+    changePassword: 'Изменение пароля',
+    changeProfileUpload: 'Редактирование профиля',
+    '404': '404',
+    '500': '500',
 };
 
 const pageKey = new URLSearchParams(window.location.search).get('page') ?? 'nav';
-const current = pages[pageKey] ?? pages['404'];
+const factory = pages[pageKey] ?? pages['404'];
 
-document.title = (current.ctx as Record<string, string>).title ?? '';
-document.body.className = current.bodyClass;
-document.body.innerHTML = Handlebars.compile(current.tpl)(current.ctx);
+document.title = pageTitles[pageKey] ?? '';
+document.body.className = pageBodyClasses[pageKey] ?? '';
+
+document.body.innerHTML = '';
+const el = factory().element();
+if (el) document.body.appendChild(el);

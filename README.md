@@ -1,9 +1,9 @@
 ## Описание
 
-Скетч из верстки с handlebars для приложения-мессенджера.
+Реактивный скетч из верстки с handlebars используемых в комопнентах TS для приложения-мессенджера.
 Макет проекта в figma - https://www.figma.com/design/ltw86cj083JXjVa2gFg8C0/Chat_external_link
 Проект развернут в Netlify - https://middle-messenger-practicum.netlify.app/
-Просмотреть страницы можно после локального запуска в http://localhost:3000/nav.html
+Просмотреть страницы можно после локального запуска в http://localhost:3000
 
 ## Установка
 
@@ -21,58 +21,79 @@
 
 ## Файловая структура
 ``` 
-src/
-├── index.ts                  # Регистрация партиалов
-│
-├── styles/
-│   ├── index.scss            # Импорт всех SCSS-файлов
-│   ├── _variables.scss       # Цвета и шрифт
-│   ├── _reset.scss           # Сброс стилей
-│   └── _shared.scss          # Переиспользуемые классы: .link, .avatar
-│
-├── layouts/                  # Лэйауты страниц
-│   ├── auth-layout/          # Форма входа и регистрации
-│   ├── profile-layout/       # Колонка «назад» и контент
-│   ├── chat-layout/          # Сайдбар и область переписки
-│   └── error-layout/         # Страница ошибки
-│
-├── blocks/                   # UI-блоки
-│   ├── form-field/           # Поле формы: label + input + ошибка
-│   ├── modal-block/          # Блок модалки с формой: заголовок, поля, кнопка, ссылка
-│   ├── modal/                # Полупрозрачный оверлей под модалкой
-│   ├── back-button/          # Кнопка «назад»
-│   ├── profile-avatar/       # Круглый аватар с hoverом
-│   ├── profile-list-item/    # Строка данных профиля
-│   ├── sidebar/              # Панель со списком чатов и поиском
-│   ├── chat-item/            # Элемент списка чатов: аватар, имя, последнее сообщение
-│   ├── messages-header/      # Шапка диалога: аватар, имя, меню управления
-│   ├── message-item/         # Сообщение (входящее или исходящее)
-│   ├── message-input/        # Форма отправки сообщения с прикреплением файла
-│   ├── dropdown-menu/        # Выпадающее меню
-│   │   └── __item/           # Один пункт меню
-│   └── error-page/           # Блок с кодом ошибки
-│
-├── pages/                    # Вызов layout + параметры
-│   ├── login.hbs
-│   ├── registration.hbs
-│   ├── messenger.hbs
-│   ├── profile.hbs
-│   ├── change-profile.hbs
-│   ├── change-password.hbs
-│   ├── 404.hbs
-│   └── 500.hbs
-│
-└── mocks/                # Моки для шаблонов
-├── chats.ts              # Список чатов
-├── messages.ts           # Сообщения открытого диалога
-├── profile-fields.ts     # Поля профиля
-├── auth-fields.ts        # Поля форм входа и регистрации
-└── dropdown-menu.ts      # Пункты меню чата и меню вложений
+├── system/                           # Ядро фреймворка
+  │   ├── Block.ts                    # Базовый класс компонента
+  │   ├── ComponentRegistry.ts        # Регистрация компонентов как Handlebars-хелперов
+  │   └── validator.ts                # Правила валидации полей
+  │
+  ├── src/
+  │   ├── index.ts                    # Точка входа, роутинг по ?page=                                                                 
+  │   ├── types.d.ts                  # Глобальные декларации типов (*.hbs, *.scss)
+  │   │
+  │   ├── assets/                     # SVG-иконки
+  │   │
+  │   ├── styles/                     # Глобальные стили
+  │   │   ├── _variables.scss
+  │   │   ├── _reset.scss
+  │   │   ├── _shared.scss
+  │   │   ├── nav.scss
+  │   │   └── index.scss              # Точка входа стилей, импортирует всё
+  │   │
+  │   ├── mocks/                      # Статические данные для разработки
+  │   │   ├── auth-fields.ts
+  │   │   ├── chats.ts
+  │   │   ├── messages.ts
+  │   │   ├── profile-fields.ts
+  │   │   ├── dropdown-menu.ts
+  │   │   └── user.ts
+  │   │
+  │   ├── blocks/                     # UI-компоненты (каждый: .ts + .scss)
+  │   │   ├── index.ts                # Регистрация всех компонентов
+  │   │   ├── back-button/
+  │   │   ├── chat-button/
+  │   │   ├── chat-item/
+  │   │   ├── dropdown-menu/
+  │   │   │   └── __item/             # Вложенный компонент элемента меню
+  │   │   ├── error-page/
+  │   │   ├── form-field/
+  │   │   ├── message-input/
+  │   │   ├── message-item/
+  │   │   ├── messages-header/
+  │   │   ├── modal/
+  │   │   ├── modal-block/
+  │   │   ├── profile-avatar/
+  │   │   ├── profile-list-item/
+  │   │   └── sidebar/
+  │   │
+  │   ├── layouts/                    # Шаблоны страниц (структура + логика)
+  │   │   ├── auth-layout/
+  │   │   ├── chat-layout/
+  │   │   ├── error-layout/
+  │   │   └── profile-layout/
+  │   │
+  │   └── pages/                      # Конкретные страницы
+  │       ├── NavPage.ts              # Навигационная страница (dev)
+  │       ├── LoginPage.ts
+  │       ├── RegistrationPage.ts
+  │       ├── MessengerPage.ts
+  │       ├── ProfilePage.ts
+  │       ├── ChangeProfilePage.ts
+  │       ├── ChangePasswordPage.ts
+  │       ├── 404.ts
+  │       └── 500.ts
+  │
+  ├── package.json
+  ├── vite.config.ts
+  ├── tsconfig.json
+  ├── eslint.config.ts
+  ├── stylelint.config.mjs
+  └── .prettierrc
 ``` 
 
 ## Соглашения
 
 - Стили — BEM, модификаторы через _, элементы через __
-- Каждый блок хранит HBS и SCSS в одной папке
+- Каждый блок хранит TS и SCSS в одной папке
 - Элементы BEM выносятся в отдельную папку только если итерируются через {{#each}}
-- Данные в шаблоны передаются через контекст index.ts, не хардкодятся в HBS
+- Основной блок-компонент и его логика находятся в system/Block.ts
+- Валидация описана в system/validator.ts

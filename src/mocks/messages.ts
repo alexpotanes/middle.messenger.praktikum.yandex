@@ -1,4 +1,10 @@
-export const messages = [
+export const messages: Array<{
+    id: number;
+    text: string;
+    time: string;
+    direction: 'incoming' | 'outgoing';
+    hasCheck: boolean;
+}> = [
     {
         id: 1,
         text: 'Привет! Смотри, тут всплыл интересный кусок лунной космической истории...',
