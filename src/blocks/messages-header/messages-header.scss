@@ -1,0 +1,70 @@
+@use '../../styles/variables' as *;
+
+.messages {
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid $color-border;
+    position: relative;
+  }
+
+  &__info {
+    display: flex;
+    align-items: center;
+  }
+
+  &__name {
+    font: bold 13px/13px $font-base;
+    color: $color-text-dark;
+  }
+
+  &__menu {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    cursor: pointer;
+
+    span,
+    span::before,
+    span::after {
+      display: block;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: $color-text-dark;
+    }
+
+    span {
+      position: relative;
+
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+      }
+
+      &::before { top: 5px; }
+      &::after  { bottom: 5px; }
+    }
+
+    &:hover {
+      background: #F5F5F5;
+
+      span,
+      span::before,
+      span::after {
+        background: $color-primary;
+      }
+    }
+
+    &:hover + .dropdown-menu {
+      display: flex;
+    }
+  }
+}

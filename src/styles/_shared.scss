@@ -1,0 +1,25 @@
+@use './variables' as *;
+.wrapper {
+  display: flex;
+  width: calc(100% - 16px);
+  height: calc(100vh - 16px);
+}
+.link {
+  font: 13px $font-base;
+  text-decoration: none;
+  color: $color-primary;
+
+  &--warn {
+    color: $color-warn;
+  }
+}
+
+.avatar {
+  width: 47px;
+  min-width: 47px;
+  height: 47px;
+  min-height: 47px;
+  border-radius: 50%;
+  background: $color-bg-light;
+  margin-right: 10px;
+}
