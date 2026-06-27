@@ -14,7 +14,7 @@
 
     "noImplicitAny": true,
     "sourceMap": true,
-    "noUnusedLocals": false,
+    "noUnusedLocals": true,
     "noUnusedParameters": false,
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true,
