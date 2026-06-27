@@ -1,10 +1,10 @@
-@use '../../styles/variables' as *;
+@use "../../styles/variables" as *;
 
 .profile__avatar {
   width: 130px;
   height: 130px;
   border-radius: 50%;
-  background: $color-bg-light url('/src/assets/avatar.svg') center no-repeat;
+  background: $color-bg-light url("/src/assets/avatar.svg") center no-repeat;
   margin-bottom: 20px;
   position: relative;
   cursor: pointer;
@@ -16,7 +16,7 @@
   }
 
   &::before {
-    content: 'Поменять аватар';
+    content: "Поменять аватар";
     display: flex;
     justify-content: center;
     align-items: center;
@@ -37,5 +37,11 @@
   &:hover::before {
     opacity: 1;
     transition: opacity ease-in-out 0.3s;
+  }
+
+  img {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
   }
 }

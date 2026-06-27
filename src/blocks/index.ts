@@ -14,6 +14,7 @@ import ErrorPage from "./error-page/ErrorPage.ts";
 import FormField from "./form-field/FormField.ts";
 import MessageInput from "./message-input/MessageInput.ts";
 import MessageItem from "./message-item/MessageItem.ts";
+import ModalRoot from "./modal-root/ModalRoot.ts";
 
 componentRegistry(BackButton);
 componentRegistry(ChatButton);
@@ -30,3 +31,4 @@ componentRegistry(ModalBlock);
 componentRegistry(ProfileAvatar);
 componentRegistry(ProfileListItem);
 componentRegistry(Sidebar);
+componentRegistry(ModalRoot);

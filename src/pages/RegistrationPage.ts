@@ -1,14 +1,14 @@
-import Block, { type BlockOwnProps } from '../../system/Block';
+import Block, { type BlockOwnProps } from "../../system/Block";
 
 interface RegistrationPageProps extends BlockOwnProps {
-    title: string;
-    buttonText: string;
-    linkText: string;
-    linkHref: string;
+  title: string;
+  buttonText: string;
+  linkText: string;
+  linkHref: string;
 }
 
 export default class RegistrationPage extends Block<RegistrationPageProps> {
-    protected template = `
+  protected template = `
           <main class="wrapper">
               {{ModalBlock
                   title=title

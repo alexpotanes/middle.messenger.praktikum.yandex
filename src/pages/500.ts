@@ -1,7 +1,7 @@
-import Block from '../../system/Block';
+import Block from "../../system/Block";
 
 export default class Page404 extends Block {
-    protected template = `
+  protected template = `
           {{ErrorLayout code="500" text="Мы уже фиксим"}}
       `;
 }

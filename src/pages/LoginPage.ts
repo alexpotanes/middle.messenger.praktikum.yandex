@@ -1,17 +1,18 @@
-import Block, { type BlockOwnProps } from '../../system/Block';
+import Block, { type BlockOwnProps } from "../../system/Block";
 
 interface LoginPageProps extends BlockOwnProps {
-    title: string;
-    buttonText: string;
-    linkText?: string;
-    linkHref?: string;
-    fields: Array<{ id: string; label: string; type: string; value?: string }>;
+  title: string;
+  buttonText: string;
+  linkText?: string;
+  linkHref?: string;
+  fields: Array<{ id: string; label: string; type: string; value?: string }>;
+  onSubmit?: (data: Record<string, FormDataEntryValue>) => Promise<void>;
 }
 
 export default class LoginPage extends Block<LoginPageProps> {
-    protected template = `
-        <main class="wrapper">
-            {{ModalBlock title=title buttonText=buttonText linkText=linkText linkHref=linkHref fields=fields}}
-        </main>
-      `;
+  protected template = `
+          <main class="wrapper">
+              {{ModalBlock title=title buttonText=buttonText linkText=linkText linkHref=linkHref fields=fields onSubmit=onSubmit}}
+          </main>
+        `;
 }

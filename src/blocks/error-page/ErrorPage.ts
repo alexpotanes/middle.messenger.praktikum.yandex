@@ -1,14 +1,14 @@
-import Block, {type BlockOwnProps} from '../../../system/Block'
+import Block, { type BlockOwnProps } from "../../../system/Block";
 
 interface ErrorPageProps extends BlockOwnProps {
-    code: number | string;
-    text: string;
-    backUrl?: string;
+  code: number | string;
+  text: string;
+  backUrl?: string;
 }
 
 export default class ErrorPage extends Block<ErrorPageProps> {
-    static componentName = 'ErrorPage';
-    protected template = `
+  static componentName = "ErrorPage";
+  protected template = `
         <main class="error">
             <h1 class="error__title">{{code}}</h1>
             <h2 class="error__text">{{text}}</h2>

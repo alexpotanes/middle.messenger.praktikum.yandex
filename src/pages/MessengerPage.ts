@@ -1,11 +1,11 @@
-import Block, { type BlockOwnProps } from '../../system/Block';
+import Block, { type BlockOwnProps } from "../../system/Block";
 
 interface MessengerPageProps extends BlockOwnProps {
-    title: string;
+  title: string;
 }
 
 export default class MessengerPage extends Block<MessengerPageProps> {
-    protected template = `
+  protected template = `
           {{ChatLayout
               chats=chats
               messages=messages

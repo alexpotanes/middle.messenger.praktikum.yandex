@@ -8,13 +8,19 @@ export default defineConfig([
     files: ["**/*.{js,mjs,cjs,ts,mts,cts}"],
     plugins: { js },
     extends: ["js/recommended"],
-    languageOptions: { globals: globals.browser }
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        FormDataEntryValue: "readonly",
+        XMLHttpRequestResponseType: "readonly",
+      },
+    },
   },
   tseslint.configs.recommended,
   {
     rules: {
-      "no-unused-vars": "error",
-      "no-undef": "error"
-    }
-  }
+      "no-unused-vars": "off",
+      "no-undef": "error",
+    },
+  },
 ]);

@@ -1,4 +1,4 @@
-@use '../../styles/variables' as *;
+@use "../../styles/variables" as *;
 
 .send-message {
   height: 52px;
@@ -12,15 +12,11 @@
     height: 32px;
     border: none;
     outline: none;
-    background: transparent url('/src/assets/paperclip.svg') center no-repeat;
+    background: transparent url("/src/assets/paperclip.svg") center no-repeat;
     cursor: pointer;
 
     &:hover {
-      background-image: url('/src/assets/paperclip-blue.svg');
-    }
-
-    &:hover + .dropdown-menu {
-      display: flex;
+      background-image: url("/src/assets/paperclip-blue.svg");
     }
   }
 
@@ -41,7 +37,7 @@
     min-height: 28px;
     border-radius: 50%;
     border: none;
-    background: $color-primary url('/src/assets/arrow.svg') center no-repeat;
+    background: $color-primary url("/src/assets/arrow.svg") center no-repeat;
     cursor: pointer;
   }
 }

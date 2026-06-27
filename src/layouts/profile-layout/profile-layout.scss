@@ -1,4 +1,4 @@
-@use '../../styles/variables' as *;
+@use "../../styles/variables" as *;
 
 .page {
   display: flex;
@@ -7,7 +7,7 @@
   width: calc(100% - 16px);
   height: calc(100vh - 16px);
 
-  &-profile>div {
+  &-profile > div {
     display: flex;
     align-items: center;
     flex-direction: row;

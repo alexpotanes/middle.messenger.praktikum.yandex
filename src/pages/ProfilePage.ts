@@ -1,11 +1,11 @@
-import Block, { type BlockOwnProps } from '../../system/Block';
+import Block, { type BlockOwnProps } from "../../system/Block";
 
 interface ProfilePageProps extends BlockOwnProps {
-    title: string;
+  title: string;
 }
 
 export default class ProfilePage extends Block<ProfilePageProps> {
-    protected template = `
+  protected template = `
           {{ProfileLayout
               profileName=profileName
               avatarSrc=avatarSrc

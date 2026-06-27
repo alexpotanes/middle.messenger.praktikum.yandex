@@ -1,155 +1,162 @@
-import './styles/index.scss';
+import "./styles/index.scss";
 
-import './blocks/index';
+import "./blocks/index";
 
-import LoginPage from './pages/LoginPage';
-import NavPage from './pages/NavPage';
+import { render } from "../system/renderDOM";
+import Router from "../system/Router";
+import store from "../system/Store";
 
-import ChatLayout from './layouts/chat-layout/Chat';
-import ProfileLayout from './layouts/profile-layout/Profile';
-import ErrorLayout from './layouts/error-layout/Error';
+import LoginPage from "./pages/LoginPage";
+import ModalRoot from "./blocks/modal-root/ModalRoot";
 
-import { chats } from './mocks/chats';
-import { currentUser } from './mocks/user';
-import { profileViewFields, profileEditFields, passwordFields } from './mocks/profile-fields';
-import { messages, activeChatName } from './mocks/messages';
-import { chatMenuItems, fileMenuItems } from './mocks/dropdown-menu';
-import { loginFields, registrationFields } from './mocks/auth-fields';
+import ChatLayout from "./layouts/chat-layout/Chat";
+import ProfileLayout from "./layouts/profile-layout/Profile";
+import ErrorLayout from "./layouts/error-layout/Error";
 
-import type Block from '../system/Block';
+import AuthAPI from "./api/auth-api";
 
-type PageFactory = () => Block;
+import { passwordFields } from "./mocks/profile-fields";
+import { chatMenuItems, fileMenuItems } from "./mocks/dropdown-menu";
+import { loginFields, registrationFields } from "./mocks/auth-fields";
 
-const pages: Record<string, PageFactory> = {
-    nav: () => new NavPage(),
+const handleSignin = (data: Record<string, FormDataEntryValue>) =>
+  AuthAPI.signin({
+    login: data.login as string,
+    password: data.password as string,
+  })
+    .then(() => AuthAPI.getUser())
+    .then((user) => {
+      store.setState("isAuthenticated", true);
+      store.setState("user", user);
+      Router.getInstance().go("/messenger");
+    });
 
-    login: () => new LoginPage({
-        title: 'Вход',
-        buttonText: 'Авторизоваться',
-        linkText: 'Нет аккаунта?',
-        linkHref: '/?page=registration',
-        fields: loginFields,
-    }),
+const handleSignup = (data: Record<string, FormDataEntryValue>) =>
+  AuthAPI.signup({
+    first_name: data.first_name as string,
+    second_name: data.second_name as string,
+    login: data.login as string,
+    email: data.email as string,
+    phone: data.phone as string,
+    password: data.password as string,
+  })
+    .then(() => AuthAPI.getUser())
+    .then((user) => {
+      store.setState("isAuthenticated", true);
+      store.setState("user", user);
+      Router.getInstance().go("/messenger");
+    });
 
-    registration: () => new LoginPage({
-        title: 'Регистрация',
-        buttonText: 'Зарегистрироваться',
-        linkText: 'Войти',
-        linkHref: '/?page=login',
-        fields: registrationFields,
-    }),
+render("#modal-root", new ModalRoot());
 
-    messenger: () => new ChatLayout({
-        chats,
-        messages,
-        activeChatName,
-        menuItems: chatMenuItems,
-        fileItems: fileMenuItems,
-    }),
+Router.use(
+  "/",
+  LoginPage,
+  {
+    title: "Вход",
+    buttonText: "Авторизоваться",
+    linkText: "Нет аккаунта?",
+    linkHref: "/sign-up",
+    fields: loginFields,
+    onSubmit: handleSignin,
+  },
+  { title: "Вход", bodyClass: "", guestOnly: true },
+)
+  .use(
+    "/login",
+    LoginPage,
+    {
+      title: "Вход",
+      buttonText: "Авторизоваться",
+      linkText: "Нет аккаунта?",
+      linkHref: "/sign-up",
+      fields: loginFields,
+      onSubmit: handleSignin,
+    },
+    { title: "Вход", bodyClass: "", guestOnly: true },
+  )
+  .use(
+    "/sign-up",
+    LoginPage,
+    {
+      title: "Регистрация",
+      buttonText: "Зарегистрироваться",
+      linkText: "Войти",
+      linkHref: "/login",
+      fields: registrationFields,
+      onSubmit: handleSignup,
+    },
+    { title: "Регистрация", bodyClass: "", guestOnly: true },
+  )
+  .use(
+    "/messenger",
+    ChatLayout,
+    {
+      chats: [],
+      messages: [],
+      menuItems: chatMenuItems,
+      fileItems: fileMenuItems,
+    },
+    { title: "Мессенджер", bodyClass: "page-chat", private: true },
+  )
+  .use(
+    "/settings",
+    ProfileLayout,
+    {
+      fields: [],
+      editable: false,
+    },
+    { title: "Профиль", bodyClass: "page page-profile", private: true },
+  )
+  .use(
+    "/changeProfile",
+    ProfileLayout,
+    {
+      fields: [],
+      editable: true,
+      mode: "profile",
+    },
+    {
+      title: "Редактирование профиля",
+      bodyClass: "page page-profile",
+      private: true,
+    },
+  )
+  .use(
+    "/changePassword",
+    ProfileLayout,
+    {
+      fields: passwordFields,
+      editable: true,
+      mode: "password",
+    },
+    {
+      title: "Изменение пароля",
+      bodyClass: "page page-profile",
+      private: true,
+    },
+  )
+  .use(
+    "/404",
+    ErrorLayout,
+    { code: "404", text: "Не туда попали" },
+    { title: "404", bodyClass: "page" },
+  )
+  .use(
+    "/500",
+    ErrorLayout,
+    { code: "500", text: "Мы уже фиксим" },
+    { title: "500", bodyClass: "page" },
+  );
 
-    messengerAddUser: () => new ChatLayout({
-        chats,
-        messages,
-        activeChatName,
-        menuItems: chatMenuItems,
-        fileItems: fileMenuItems,
-        modal: {
-            title: 'Добавить пользователя',
-            buttonText: 'Добавить',
-            fields: [{ id: 'login', label: 'Логин', type: 'text', value: '' }],
-        },
-    }),
-
-    messengerRemoveUser: () => new ChatLayout({
-        chats,
-        messages,
-        activeChatName,
-        menuItems: chatMenuItems,
-        fileItems: fileMenuItems,
-        modal: {
-            title: 'Удалить пользователя',
-            buttonText: 'Удалить',
-            fields: [{ id: 'login', label: 'Логин', type: 'text', value: '' }],
-        },
-    }),
-
-    profile: () => new ProfileLayout({
-        profileName: currentUser.firstName,
-        avatarSrc: currentUser.avatarSrc,
-        fields: profileViewFields,
-        editable: false,
-    }),
-
-    changeProfile: () => new ProfileLayout({
-        profileName: currentUser.firstName,
-        avatarSrc: currentUser.avatarSrc,
-        fields: profileEditFields,
-        editable: true,
-    }),
-
-    changePassword: () => new ProfileLayout({
-        avatarSrc: currentUser.avatarSrc,
-        fields: passwordFields,
-        editable: true,
-    }),
-
-    changeProfileUpload: () => new ProfileLayout({
-        profileName: currentUser.firstName,
-        avatarSrc: currentUser.avatarSrc,
-        fields: profileEditFields,
-        editable: true,
-        modal: {
-            title: 'Загрузите файл',
-            buttonText: 'Поменять',
-            fields: [{
-                id: 'upload',
-                label: 'Выбрать файл на компьютере',
-                type: 'file',
-                isFile: true,
-                value: '',
-            }],
-        },
-    }),
-
-    '404': () => new ErrorLayout({ code: '404', text: 'Не туда попали' }),
-    '500': () => new ErrorLayout({ code: '500', text: 'Мы уже фиксим' }),
-};
-
-const pageBodyClasses: Record<string, string> = {
-    nav: 'nav-page',
-    login: '',
-    registration: '',
-    messenger: 'page-chat',
-    messengerAddUser: 'page-chat',
-    messengerRemoveUser: 'page-chat',
-    profile: 'page page-profile',
-    changeProfile: 'page page-profile',
-    changePassword: 'page page-profile',
-    changeProfileUpload: 'page page-profile',
-    '404': 'page',
-    '500': 'page',
-};
-
-const pageTitles: Record<string, string> = {
-    login: 'Вход',
-    registration: 'Регистрация',
-    messenger: 'Мессенджер',
-    messengerAddUser: 'Мессенджер',
-    messengerRemoveUser: 'Мессенджер',
-    profile: 'Профиль',
-    changeProfile: 'Редактирование профиля',
-    changePassword: 'Изменение пароля',
-    changeProfileUpload: 'Редактирование профиля',
-    '404': '404',
-    '500': '500',
-};
-
-const pageKey = new URLSearchParams(window.location.search).get('page') ?? 'nav';
-const factory = pages[pageKey] ?? pages['404'];
-
-document.title = pageTitles[pageKey] ?? '';
-document.body.className = pageBodyClasses[pageKey] ?? '';
-
-document.body.innerHTML = '';
-const el = factory().element();
-if (el) document.body.appendChild(el);
+AuthAPI.getUser()
+  .then((user) => {
+    store.setState("isAuthenticated", true);
+    store.setState("user", user);
+  })
+  .catch(() => {
+    store.setState("isAuthenticated", false);
+  })
+  .finally(() => {
+    Router.start();
+  });

@@ -1,11 +1,11 @@
-import Block, { type BlockOwnProps } from '../../system/Block';
+import Block, { type BlockOwnProps } from "../../system/Block";
 
 interface ChangePasswordPageProps extends BlockOwnProps {
-    title: string;
+  title: string;
 }
 
 export default class ChangePasswordPage extends Block<ChangePasswordPageProps> {
-    protected template = `
+  protected template = `
           {{ProfileLayout
               profileName=profileName
               avatarSrc=avatarSrc
