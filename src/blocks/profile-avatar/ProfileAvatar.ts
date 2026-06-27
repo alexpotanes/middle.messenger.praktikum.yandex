@@ -89,9 +89,6 @@ export default class ProfileAvatar extends Block<ProfileAvatarProps> {
     try {
       const compressedBlob = await this.compressImage(file);
 
-      console.log("Original size:", file.size, "bytes");
-      console.log("Compressed size:", compressedBlob.size, "bytes");
-
       const formData = new FormData();
       formData.append("avatar", compressedBlob, file.name);
 

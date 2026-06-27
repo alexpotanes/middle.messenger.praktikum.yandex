@@ -3,7 +3,8 @@ import store from "./Store";
 import isEqual from "../utils/isEqual.ts";
 import type { Indexed } from "../utils/types";
 
-type Constructable = new (...args: never[]) => Block;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type Constructable = new (...args: any[]) => Block;
 interface ComponentConstructor extends Constructable {
   componentName: string;
 }
@@ -14,13 +15,14 @@ export function connect(mapStateToProps: (state: Indexed) => Indexed) {
       private _unsubscribe?: () => void;
       private _state: Indexed;
 
-      constructor(...args: never[]) {
-        const props = (args[0] as Record<string, unknown>) ?? {};
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      constructor(...args: any[]) {
         const state = mapStateToProps(store.getState());
 
-        super({ ...props, ...state } as never);
+        super(...args);
 
         this._state = state;
+        this.setProps({ ...state });
       }
 
       componentDidMount() {

@@ -56,8 +56,6 @@ export default class ChatItem extends Block<ChatItemProps> {
 
   protected events = {
     click: () => {
-      console.log("ChatItem clicked, id:", this.props.id);
-      console.log("onClick function:", this.props.onClick);
       this.props.onClick?.(this.props.id);
     },
   };
