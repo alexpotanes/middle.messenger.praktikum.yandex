@@ -176,6 +176,7 @@ class ProfileLayout extends Block<ProfileLayoutProps> {
         email: data.email,
         phone: data.phone,
       })
+        .then(() => AuthAPI.getUser())
         .then((user: unknown) => {
           store.setState("user", user);
           Router.getInstance().go("/settings");
