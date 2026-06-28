@@ -7,7 +7,7 @@
   min-height: 28px;
   border-radius: 50%;
   border: none;
-  background: $color-primary url("/src/assets/arrow.svg") center no-repeat;
+  background: $color-primary url("../../assets/arrow.svg") center no-repeat;
   cursor: pointer;
   transform: rotate(180deg);
 }

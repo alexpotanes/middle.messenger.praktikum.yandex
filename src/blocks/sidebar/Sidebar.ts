@@ -1,4 +1,5 @@
 import Block, { type BlockOwnProps } from "../../../system/Block";
+import chevronIcon from '../../assets/chevron.svg';
 
 interface SidebarProps extends BlockOwnProps {
   chats: Array<{
@@ -21,7 +22,7 @@ export default class Sidebar extends Block<SidebarProps> {
           <aside class="chats">
               <header class="chats__header">
                   <div class="chats__profile">
-                      <a href="/settings">Профиль <img src="/src/assets/chevron.svg" alt="chevron" /></a>
+                      <a href="/settings">Профиль <img src="${chevronIcon}" alt="chevron" /></a>
                   </div>
                   <div class="chats__search">
                      <input ref="searchInput" type="text" id="search" name="search" />

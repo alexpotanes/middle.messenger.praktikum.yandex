@@ -1,4 +1,5 @@
 import Block, { type BlockOwnProps } from "../../../system/Block";
+import doubleCheckIcon from '../../assets/double-check.svg';
 
 interface MessageItemProps extends BlockOwnProps {
   text: string;
@@ -30,7 +31,7 @@ export default class MessageItem extends Block<MessageItemProps> {
               {{/if}}
               <span class="message-item__time">
                   {{#if hasCheck}}
-                      <img src="/src/assets/double-check.svg" alt="double-check" />
+                      <img src="${doubleCheckIcon}" alt="double-check" />
                   {{/if}}
                   {{time}}
               </span>

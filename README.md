@@ -68,7 +68,6 @@
 │   ├── mocks/                        # Статические данные для разработки
 │   │   ├── auth-fields.ts
 │   │   ├── chats.ts
-│   │   ├── messages.ts
 │   │   ├── profile-fields.ts
 │   │   ├── dropdown-menu.ts
 │   │   └── user.ts
