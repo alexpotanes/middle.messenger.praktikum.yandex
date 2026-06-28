@@ -18,7 +18,7 @@ interface PasswordData {
 }
 
 const UserAPI = {
-  updateProfile: (data: ProfileData) => transport.put("/settings", { data }),
+  updateProfile: (data: ProfileData) => transport.put("/profile", { data }),
 
   updateAvatar: (formData: FormData) =>
     transport.put("/profile/avatar", { data: formData }),
