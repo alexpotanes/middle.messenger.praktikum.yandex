@@ -1,6 +1,4 @@
-import HTTPTransport from "../../system/request";
-
-const transport = new HTTPTransport("https://ya-praktikum.tech/api/v2/user");
+import { TRANSPORT } from "../../system/constant.ts";
 
 interface ProfileData {
   first_name: string;
@@ -18,16 +16,12 @@ interface PasswordData {
 }
 
 const UserAPI = {
-  updateProfile: (data: ProfileData) => transport.put("/profile", { data }),
-
+  updateProfile: (data: ProfileData) => TRANSPORT.put("/profile", { data }),
   updateAvatar: (formData: FormData) =>
-    transport.put("/profile/avatar", { data: formData }),
-
-  updatePassword: (data: PasswordData) => transport.put("/password", { data }),
-
-  getById: (id: number) => transport.get(`/${id}`),
-
-  search: (login: string) => transport.post("/search", { data: { login } }),
+      TRANSPORT.put("/profile/avatar", { data: formData }),
+  updatePassword: (data: PasswordData) => TRANSPORT.put("/password", { data }),
+  getById: (id: number) => TRANSPORT.get(`/${id}`),
+  search: (login: string) => TRANSPORT.post("/search", { data: { login } }),
 };
 
 export default UserAPI;

@@ -34,7 +34,7 @@ export default class ChatItem extends Block<ChatItemProps> {
           <li class="chat__item{{#if isActive}} chat__item_active{{/if}}">
               <div class="avatar">
                   {{#if avatarUrl}}
-                      <img class="avatar__img" src="{{avatarUrl}}" alt="avatar" />
+                      <img class="avatar__img" src="{{ avatarUrl }}" alt="avatar" />
                   {{/if}}
               </div>
               <div class="chat__data">

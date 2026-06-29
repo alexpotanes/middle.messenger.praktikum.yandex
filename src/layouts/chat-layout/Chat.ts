@@ -3,6 +3,7 @@ import ChatAPI from "../../api/chat-api";
 import UserAPI from "../../api/user-api";
 import WebSocketService from "../../services/WebSocketService";
 import store from "../../../system/Store";
+import { BASE_URL } from "../../../system/constant.ts";
 
 interface ChatMessage {
   text: string;
@@ -134,7 +135,7 @@ export default class ChatLayout extends Block<ChatLayoutProps> {
           id: chat.id,
           title: chat.title,
           avatarUrl: chat.avatar
-            ? `https://ya-praktikum.tech/api/v2/resources${chat.avatar}`
+            ? `${BASE_URL}/resources${chat.avatar}`
             : "",
           unreadCount: chat.unread_count,
           lastMessage: chat.last_message

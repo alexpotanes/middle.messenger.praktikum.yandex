@@ -5,6 +5,7 @@ import UserAPI from "../../api/user-api";
 import Router from "../../../system/Router";
 import store from "../../../system/Store";
 import type { Indexed } from "../../../utils/types";
+import { BASE_URL } from "../../../system/constant.ts";
 
 interface RawUser {
   id: number;
@@ -192,7 +193,7 @@ class ProfileLayout extends Block<ProfileLayoutProps> {
       this.props = {
         ...this.props,
         avatarSrc: this.props.user.avatar
-          ? `https://ya-praktikum.tech/api/v2/resources${this.props.user.avatar}`
+          ? `${BASE_URL}/resources${this.props.user.avatar}`
           : "",
       };
 

@@ -1,8 +1,5 @@
-import HTTPTransport from "../../system/request";
+import { TRANSPORT } from "../../system/constant.ts";
 
-const transport = new HTTPTransport("https://ya-praktikum.tech/api/v2/auth");
-
-// Типы запросов
 interface SignUpData {
   first_name: string;
   second_name: string;
@@ -18,17 +15,10 @@ interface SignInData {
 }
 
 const AuthAPI = {
-  // POST /auth/signup — тело: SignUpData, ответ: { id: number }
-  signup: (data: SignUpData) => transport.post("/signup", { data }),
-
-  // POST /auth/signin — тело: SignInData, ответ: 'OK'
-  signin: (data: SignInData) => transport.post("/signin", { data }),
-
-  // GET /auth/user — без тела, ответ: объект пользователя
-  getUser: () => transport.get("/user"),
-
-  // POST /auth/logout — без тела, ответ: 'OK'
-  logout: () => transport.post("/logout"),
+  signup: (data: SignUpData) => TRANSPORT.post("/signup", { data }),
+  signin: (data: SignInData) => TRANSPORT.post("/signin", { data }),
+  getUser: () => TRANSPORT.get("/user"),
+  logout: () => TRANSPORT.post("/logout"),
 };
 
 export default AuthAPI;
