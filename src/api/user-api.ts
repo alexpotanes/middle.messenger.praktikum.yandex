@@ -16,12 +16,12 @@ interface PasswordData {
 }
 
 const UserAPI = {
-  updateProfile: (data: ProfileData) => TRANSPORT.put("/profile", { data }),
+  updateProfile: (data: ProfileData) => TRANSPORT.put("/user/profile", { data }),
   updateAvatar: (formData: FormData) =>
-      TRANSPORT.put("/profile/avatar", { data: formData }),
-  updatePassword: (data: PasswordData) => TRANSPORT.put("/password", { data }),
-  getById: (id: number) => TRANSPORT.get(`/${id}`),
-  search: (login: string) => TRANSPORT.post("/search", { data: { login } }),
+      TRANSPORT.put("/user/profile/avatar", { data: formData }),
+  updatePassword: (data: PasswordData) => TRANSPORT.put("/user/password", { data }),
+  getById: (id: number) => TRANSPORT.get(`/user/${id}`),
+  search: (login: string) => TRANSPORT.post("/user/search", { data: { login } }),
 };
 
 export default UserAPI;

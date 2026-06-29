@@ -15,10 +15,10 @@ interface SignInData {
 }
 
 const AuthAPI = {
-  signup: (data: SignUpData) => TRANSPORT.post("/signup", { data }),
-  signin: (data: SignInData) => TRANSPORT.post("/signin", { data }),
-  getUser: () => TRANSPORT.get("/user"),
-  logout: () => TRANSPORT.post("/logout"),
+  signup: (data: SignUpData) => TRANSPORT.post("/auth/signup", { data }),
+  signin: (data: SignInData) => TRANSPORT.post("/auth/signin", { data }),
+  getUser: () => TRANSPORT.get("/auth/user"),
+  logout: () => TRANSPORT.post("/auth/logout"),
 };
 
 export default AuthAPI;
