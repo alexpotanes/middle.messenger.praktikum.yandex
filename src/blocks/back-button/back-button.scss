@@ -1,0 +1,13 @@
+@use "../../styles/variables" as *;
+
+.page__back-button {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  min-height: 28px;
+  border-radius: 50%;
+  border: none;
+  background: $color-primary url("../../assets/arrow.svg") center no-repeat;
+  cursor: pointer;
+  transform: rotate(180deg);
+}

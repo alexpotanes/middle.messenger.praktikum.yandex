@@ -1,0 +1,49 @@
+@use "../../styles/variables" as *;
+
+.list__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 30px;
+  border-bottom: 1px solid $color-border;
+  font: 13px $font-base;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &-label {
+    color: $color-text-dark;
+    font-weight: 500;
+  }
+
+  &-value {
+    color: $color-text-muted;
+  }
+
+  &-input {
+    border: none;
+    text-align: end;
+    color: $color-text-muted;
+    padding: 3px 6px;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &-wrap {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-error {
+    font:
+      bold 8px Arial,
+      Helvetica,
+      sans-serif;
+    color: #ff2f2f;
+    margin-top: 7px;
+  }
+}

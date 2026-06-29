@@ -1,0 +1,22 @@
+@use "../../styles/variables" as *;
+
+.error {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+
+  &__title {
+    font: bold 40px/20px $font-base;
+  }
+
+  &__text {
+    font: bold 20px $font-base;
+  }
+
+  &__link {
+    margin: 40px 0;
+    font: bold 11px $font-base;
+    text-decoration: none;
+    color: $color-primary;
+  }
+}

@@ -1,0 +1,62 @@
+@use "../../styles/variables" as *;
+
+.page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(100% - 16px);
+  height: calc(100vh - 16px);
+
+  &-profile > div {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  &__back {
+    width: 64px;
+    height: calc(100vh - 16px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $color-bg-sidebar;
+    border-right: 1px solid $color-border;
+    flex-shrink: 0;
+  }
+
+  &__content {
+    width: calc(100% - 64px);
+    height: calc(100vh - 16px);
+    padding-right: 64px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+}
+.profile {
+  &-layout {
+    display: flex;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  &__title {
+    font: bold 16px $font-base;
+  }
+  &__data-list {
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+    margin: 40px 0;
+    padding: 0;
+    width: 510px;
+  }
+}

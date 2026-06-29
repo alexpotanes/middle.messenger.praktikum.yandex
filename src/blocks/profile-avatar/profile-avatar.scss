@@ -1,0 +1,47 @@
+@use "../../styles/variables" as *;
+
+.profile__avatar {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: $color-bg-light url("../../assets/avatar.svg") center no-repeat;
+  margin-bottom: 20px;
+  position: relative;
+  cursor: pointer;
+
+  input {
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+
+  &::before {
+    content: "Поменять аватар";
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
+    padding: 20px;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    font: bold 14px $font-base;
+    color: $color-white;
+    text-align: center;
+    opacity: 0;
+  }
+
+  &:hover::before {
+    opacity: 1;
+    transition: opacity ease-in-out 0.3s;
+  }
+
+  img {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+  }
+}

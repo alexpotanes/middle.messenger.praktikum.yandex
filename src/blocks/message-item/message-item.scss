@@ -1,0 +1,47 @@
+@use "../../styles/variables" as *;
+
+.message-item {
+  margin-bottom: 10px;
+  padding: 10px 10px 15px;
+  position: relative;
+  border-radius: 12px;
+  font: bold 12px/15px $font-base;
+  color: $color-text-dark;
+  box-sizing: border-box;
+  max-width: 450px;
+
+  &__image {
+    max-width: 300px;
+    border-radius: 8px;
+    display: block;
+  }
+
+  &_incoming {
+    background: $color-msg-incoming;
+    align-self: flex-start;
+  }
+
+  &_outgoing {
+    background: $color-msg-outgoing;
+    align-self: flex-end;
+    min-width: 120px;
+  }
+
+  &__time {
+    position: absolute;
+    font: bold 9px/9px $font-base;
+    color: $color-text-muted;
+    bottom: 8px;
+    right: 11px;
+  }
+
+  &_outgoing &__time {
+    color: $color-primary;
+  }
+
+  &__image {
+    max-width: 300px;
+    border-radius: 8px;
+    display: block;
+  }
+}
