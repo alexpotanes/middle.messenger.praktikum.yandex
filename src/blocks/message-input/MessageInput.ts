@@ -1,5 +1,6 @@
 import Block, { type BlockOwnProps } from "../../../system/Block";
 import { validate } from "../../../utils/validator.ts";
+import { sanitizeImages } from "../../../utils/sanitize.ts";
 
 interface MessageInputProps extends BlockOwnProps {
   _message?: string;
@@ -52,7 +53,8 @@ export default class MessageInput extends Block<MessageInputProps> {
       if (file.type.startsWith("image/") || file.type.startsWith("video/")) {
         const reader = new FileReader();
         reader.onload = () => {
-          this.props.onSend(reader.result as string);
+          const sanitized = sanitizeImages(reader.result as string);
+          this.props.onSend(sanitized);
         };
         reader.readAsDataURL(file);
       } else {

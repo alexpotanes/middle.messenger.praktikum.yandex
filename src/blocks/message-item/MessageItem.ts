@@ -1,5 +1,5 @@
 import Block, { type BlockOwnProps } from "../../../system/Block";
-import doubleCheckIcon from '../../assets/double-check.svg';
+import doubleCheckIcon from "../../assets/double-check.svg";
 
 interface MessageItemProps extends BlockOwnProps {
   text: string;
@@ -14,11 +14,22 @@ export default class MessageItem extends Block<MessageItemProps> {
 
   constructor(props?: MessageItemProps) {
     super(props);
+
+    const isValidDataURL = (url: string): boolean => {
+      if (!url.startsWith("data:")) return false;
+
+      const safeTypes = [
+        "data:image/png",
+        "data:image/jpeg",
+        "data:image/gif",
+        "data:image/webp",
+      ];
+      return safeTypes.some((type) => url.startsWith(type));
+    };
+
     this.props = {
       ...this.props,
-      isImage:
-        this.props.text?.startsWith("data:image/") ||
-        this.props.text?.startsWith("data:video/"),
+      isImage: this.props.text ? isValidDataURL(this.props.text) : false,
     };
   }
 
