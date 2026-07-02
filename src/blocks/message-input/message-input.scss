@@ -1,0 +1,43 @@
+@use "../../styles/variables" as *;
+
+.send-message {
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+
+  &__file {
+    width: 32px;
+    height: 32px;
+    border: none;
+    outline: none;
+    background: transparent url("../../assets/paperclip.svg") center no-repeat;
+    cursor: pointer;
+
+    &:hover {
+      background-image: url("../../assets/paperclip-blue.svg");
+    }
+  }
+
+  &__text {
+    margin: 0 10px;
+    padding: 10px 16px;
+    border-radius: 30px;
+    background: $color-bg-light;
+    width: 100%;
+    border: none;
+    outline: none;
+  }
+
+  &__button {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    min-height: 28px;
+    border-radius: 50%;
+    border: none;
+    background: $color-primary url("../../assets/arrow.svg") center no-repeat;
+    cursor: pointer;
+  }
+}

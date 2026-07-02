@@ -1,0 +1,52 @@
+@use "../../styles/variables" as *;
+
+.dropdown-menu {
+  list-style: none;
+  margin: 0;
+  padding: 15px;
+  display: none;
+  flex-direction: column;
+  background: $color-white;
+  border-radius: 12px;
+  box-shadow: rgba(0, 0, 0, 0.14) 0 0 6px;
+  position: absolute;
+  z-index: 10;
+
+  &_open {
+    display: flex;
+  }
+
+  &_top {
+    top: 83px;
+    right: -10px;
+  }
+
+  &_bottom {
+    bottom: 63px;
+    left: -10px;
+  }
+
+  &__item {
+    white-space: nowrap;
+    margin-bottom: 16px;
+    font: 12px/1 $font-base;
+    color: $color-text-dark;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__icon {
+    width: 22px;
+    height: 22px;
+    margin-right: 15px;
+  }
+
+  &__icon[alt="add"] {
+    transform: rotate(45deg);
+  }
+}
